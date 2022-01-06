@@ -1,0 +1,8 @@
+---
+# defaults file for package_updates
+# reboot_handler
+reboot_timeout: 900
+test_command: uptime
+
+# redhat security only
+security_only: false

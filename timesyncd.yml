@@ -1,0 +1,7 @@
+---
+- name: Configure systemd-timesyncd service
+  hosts: all
+  become: true
+
+  roles:
+    - role: systemd-timesyncd

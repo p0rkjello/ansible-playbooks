@@ -1,0 +1,8 @@
+---
+# defaults file for systemd-timesyncd
+timesyncd_ntp: time.google.com
+timesyncd_fallback:
+  - 0.us.pool.ntp.org
+  - 1.us.pool.ntp.org
+  - 2.us.pool.ntp.org
+  - 3.us.pool.ntp.org

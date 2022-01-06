@@ -1,0 +1,24 @@
+---
+# tasks file for systemd-timesyncd
+- name: Include OS specific variables
+  include_vars: "{{ ansible_os_family | lower }}.yml"
+
+- name: Remove chrony package
+  ansible.builtin.package:
+    name: chrony
+    state: absent
+
+- name: Apply template /etc/systemd/timesyncd.conf
+  ansible.builtin.template:
+    src: timesyncd.conf.j2
+    dest: /etc/systemd/timesyncd.conf
+    owner: root
+    group: root
+    mode: "0644"
+  notify: restart timesyncd
+
+- name: Enable and start systemd-timesyncd
+  ansible.builtin.service:
+    name: "{{ timesyncd_service }}"
+    enabled: true
+    state: started

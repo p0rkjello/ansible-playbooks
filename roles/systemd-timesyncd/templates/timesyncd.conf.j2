@@ -1,0 +1,6 @@
+[Time]
+NTP={{ timesyncd_ntp }}
+FallbackNTP={{ timesyncd_fallback | join(' ') }}
+RootDistanceMaxSec={{ timesyncd_rootdistancemaxsec | default(5) }}
+PollIntervalMinSec={{ timesyncd_pollintervalminsec | default(32) }}
+PollIntervalMaxSec={{ timesyncd_pollintervalmaxsec | default(2048) }}

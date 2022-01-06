@@ -1,0 +1,36 @@
+---
+- name: Install dnf-utils
+  ansible.builtin.dnf:
+    name: 'dnf-utils'
+    state: present
+    update_cache: yes
+
+- name: Upgrade all packages
+  become: yes
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+    update_cache: yes
+    update_only: no
+  register: reg_upgrade_ok
+  when: security_only | bool == false
+
+- name: Upgrade security related packages
+  become: yes
+  ansible.builtin.dnf:
+    name: '*'
+    security: yes
+    state: latest
+    update_cache: yes
+    update_only: no
+  register: reg_upgrade_ok
+  when: security_only | bool == true
+
+- name: Check if a reboot is required
+  command: needs-restarting -r
+  register: reg_reboot_required
+  ignore_errors: yes
+  failed_when: false
+  changed_when: reg_reboot_required.rc != 0
+  notify:
+    - reboot server

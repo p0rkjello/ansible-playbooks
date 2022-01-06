@@ -1,0 +1,7 @@
+---
+# handlers file for package_updates
+- name: reboot server
+  ansible.builtin.reboot:
+    msg: 'Reboot initiated by Ansible after OS update'
+    reboot_timeout: "{{ reboot_timeout | int }}"
+    test_command: "{{ test_command }}"

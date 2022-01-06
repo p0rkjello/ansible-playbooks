@@ -1,0 +1,7 @@
+---
+- name: Upgrade Linux OS packages
+  hosts: all
+  become: true
+
+  roles:
+    - role: upgrade-packages
